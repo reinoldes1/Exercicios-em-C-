@@ -77,27 +77,31 @@
         Console.WriteLine($"O seu IMC é {IMC:f2}");
         if (IMC <= 18.5)
         {
-
+            Console.WriteLine("Você está abaixo do peso");
         }
-        else if (IMC >=18.6 ||  IMC <= 24.9)
+        else if (IMC >= 18.6 && IMC <= 24.9)
         {
-
+            Console.WriteLine("Você está no peso ideal!");
         }
-        else if (IMC >= 25.0 || IMC <= 29.9)
+        else if (IMC >= 25.0 && IMC <= 29.9)
         {
-
+            Console.WriteLine("Você está no sobrepeso");
         }
-        else if (IMC >= 30.0 || IMC <= 34.9)
+        else if (IMC >= 30.0 && IMC <= 34.9)
         {
-
+            Console.WriteLine("Você está na obesidade grau I");
         }
-        else if (IMC >= 35.0 || IMC <= 39.9)
+        else if (IMC >= 35.0 && IMC <= 39.9)
         {
-
+            Console.WriteLine("Você está na obesidade grau II");
         }
         else if (IMC >= 40)
         {
-
+            Console.WriteLine("Você está na obesidade grau II");
+        }
+        else
+        {
+            Console.WriteLine("Error");
         }
     }
 }
