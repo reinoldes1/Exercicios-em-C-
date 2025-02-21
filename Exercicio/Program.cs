@@ -1,4 +1,6 @@
-﻿class Program
+﻿using System.Security;
+
+class Program
 {
     static string nome;
     static int idade;
@@ -34,7 +36,10 @@
         while (true)
         {
             Console.Write("Digite a sua altura: ");
-            if (double.TryParse(Console.ReadLine(), out altura))
+            string inputUsuario = Console.ReadLine().Replace('.',',');
+            if (!inputUsuario.Contains(","))
+                inputUsuario = (double.Parse(inputUsuario) / 100).ToString("0.00");
+            if (double.TryParse(inputUsuario, out altura))
                 break;
             Thread.Sleep(1200);
             Console.WriteLine("Valor incorreto. Digite sua altura novamente por exemplo: 1.70");
@@ -64,44 +69,51 @@
 
     static void Main()
     {
-        pegaNome();
-        pegaIdade();
-        pegaAltura();
-        pegaPeso();
-        calculaIMC();
-        Console.WriteLine("Pegando a suas informações...");
-        Thread.Sleep(1000);
-        Console.WriteLine("Calculando o seu IMC...");
-        Thread.Sleep(1000);
-        Console.WriteLine($"O seu nome é {nome}, você tem {idade} anos e {altura:f2}m de altura!");
-        Console.WriteLine($"O seu IMC é {IMC:f2}");
-        if (IMC <= 18.5)
+        do
         {
-            Console.WriteLine("Você está abaixo do peso");
-        }
-        else if (IMC >= 18.6 && IMC <= 24.9)
-        {
-            Console.WriteLine("Você está no peso ideal!");
-        }
-        else if (IMC >= 25.0 && IMC <= 29.9)
-        {
-            Console.WriteLine("Você está no sobrepeso");
-        }
-        else if (IMC >= 30.0 && IMC <= 34.9)
-        {
-            Console.WriteLine("Você está na obesidade grau I");
-        }
-        else if (IMC >= 35.0 && IMC <= 39.9)
-        {
-            Console.WriteLine("Você está na obesidade grau II");
-        }
-        else if (IMC >= 40)
-        {
-            Console.WriteLine("Você está na obesidade grau II");
-        }
-        else
-        {
-            Console.WriteLine("Error");
-        }
+            Console.Clear();
+            pegaNome();
+            pegaIdade();
+            pegaAltura();
+            pegaPeso();
+            calculaIMC();
+            Console.WriteLine("Pegando a suas informações...");
+            Thread.Sleep(1000);
+            Console.WriteLine("Calculando o seu IMC...");
+            Thread.Sleep(1000);
+            Console.WriteLine($"O seu nome é {nome}, você tem {idade} anos e {altura:f2}m de altura! Seu peso é {peso}!");
+            Console.WriteLine($"O seu IMC é {IMC:f2}");
+            if (IMC <= 18.5)
+            {
+                Console.WriteLine("Você está abaixo do peso");
+            }
+            else if (IMC >= 18.6 && IMC <= 24.9)
+            {
+                Console.WriteLine("Você está no peso ideal!");
+            }
+            else if (IMC >= 25.0 && IMC <= 29.9)
+            {
+                Console.WriteLine("Você está no sobrepeso");
+            }
+            else if (IMC >= 30.0 && IMC <= 34.9)
+            {
+                Console.WriteLine("Você está na obesidade grau I");
+            }
+            else if (IMC >= 35.0 && IMC <= 39.9)
+            {
+                Console.WriteLine("Você está na obesidade grau II");
+            }
+            else if (IMC >= 40)
+            {
+                Console.WriteLine("Você está na obesidade grau II");
+            }
+            else
+            {
+                Console.WriteLine("Error");
+            }
+
+            Console.WriteLine("Deseja continuar? S/N: ");
+        } while (Console.ReadLine().ToLower() == "s");
+        
     }
 }
